@@ -29,5 +29,6 @@ def image_loader(path, output_path):
     mobile_input = preprocess_mobile_image(mobile_image_path)
     mobile_input = mobile_input.reshape((784, 1))
     predicted_output = make_predictions(mobile_input, W1, b1, W2, b2)
-    plt.imshow(mobile_input.reshape((28, 28)), cmap="gray")
+    plt.imshow(mobile_input.reshape((28, 28)), cmap="gray", extent=[0, 28, 28, 0])
+    plt.axis("off")
     plt.savefig(output_path+ str(predicted_output))

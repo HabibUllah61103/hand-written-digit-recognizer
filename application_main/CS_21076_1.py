@@ -134,11 +134,12 @@ class GUI:
                 f.close()
 
         def open_file_manager(self):
+            initial_path = os.getcwd()
             self.file_manager = MDFileManager(
                 exit_manager=self.exit_file_manager,
                 select_path=self.select_path,   
             )
-            self.file_manager.show("/")
+            self.file_manager.show(initial_path)
 
         def exit_file_manager(self, *args):
             # Callback for when the user exits the file manager

@@ -105,34 +105,6 @@
                 font_size: 18
                 font_name: "time_new_romans.ttf"
 
-            MDTextField:
-                id: customer_sign_up_phone_no_textfield
-                hint_text: "Enter Phone Number"
-                font_size: 18
-                font_name: "time_new_romans.ttf"
-
-            MDTextField:
-                id: customer_sign_up_credit_no_textfield
-                hint_text: "Enter Credit Card Number"
-                font_size: 18
-                font_name: "time_new_romans.ttf"
-
-            MDTextField:
-                id: customer_sign_up_gender_textfield
-                hint_text: "Enter the Gender"
-                helper_text: "Male or Female"
-                helper_text_mode: "on_focus"
-                font_size: 18
-                font_name: "time_new_romans.ttf"
-
-            MDTextField:
-                id: customer_sign_up_date_textfield
-                hint_text: "Enter the Date of Birth"
-                helper_text: "Date format is DD-MM-YYYY"
-                helper_text_mode: "on_focus"
-                font_size: 18
-                font_name: "time_new_romans.ttf"
-
     MDGridLayout:
         cols: 1
         spacing: "15dp"
@@ -149,7 +121,7 @@
             font_name: "time_new_romans.ttf"
             on_release:
                 root.verify(customer_sign_up_pswd_textfield, customer_sign_up_re_pswd_textfield)
-                root.data_saver(customer_sign_up_f_name_textfield, customer_sign_up_m_name_textfield, customer_sign_up_l_name_textfield, customer_sign_up_email_textfield, customer_sign_up_pswd_textfield, customer_sign_up_phone_no_textfield, customer_sign_up_credit_no_textfield, customer_sign_up_gender_textfield, customer_sign_up_date_textfield) if root.verify(customer_sign_up_pswd_textfield, customer_sign_up_re_pswd_textfield) else root.show_dialog_box()
+                root.data_saver(customer_sign_up_f_name_textfield, customer_sign_up_m_name_textfield, customer_sign_up_l_name_textfield, customer_sign_up_email_textfield, customer_sign_up_pswd_textfield) if root.verify(customer_sign_up_pswd_textfield, customer_sign_up_re_pswd_textfield) else root.show_dialog_box()
 
     MDBoxLayout:
         orientation: "horizontal"
