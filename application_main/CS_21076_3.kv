@@ -1,0 +1,174 @@
+#:set w dp(700)
+#:set h dp(540)
+
+
+<CustomerSignUp>:
+    name: "customer_sign_up"
+
+    canvas.before:
+        Color:
+            rgba: .9, .9, .9, .3
+        Rectangle:
+            size: self.size
+
+    canvas:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            size: w, h
+            pos: self.center_x - w / 2, self.center_y - h / 2
+        Color:
+            rgba: 0, 0, 0, .2
+        Line:
+            points: (dp(240), dp(520), self.width - dp(240), dp(520))
+        Line:
+            points: (dp(240), dp(130), self.width - dp(240), dp(130))
+
+    MDLabel:
+        id: customer_sign_up_new_account_label
+        text: "Create a New Customer Account"
+        text_size: self.width, dp(490)
+        font_name: "time_new_romans.ttf"
+        font_size: 35
+        halign: "center"
+        valign: "top"
+
+    MDGridLayout:
+        cols: 1
+        spacing: "15dp"
+        row_force_default: True
+        row_default_height: 30
+        size_hint: None, None
+        size: "600dp", "20dp"
+        pos_hint: {"center_x": .5, "center_y": .75}
+
+        MDGridLayout:
+            cols: 3
+            spacing: "15dp"
+            row_force_default: True
+            row_default_height: 30
+
+            MDTextField:
+                id: customer_sign_up_f_name_textfield
+                hint_text: "Enter First Name"
+                multiline: False
+                font_size: 18
+                font_name: "time_new_romans.ttf"
+
+            MDTextField:
+                id: customer_sign_up_m_name_textfield
+                hint_text: "Enter Middle Name"
+                helper_text: "Leave empty if you don't have one"
+                helper_text_mode: "on_focus"
+                multiline: False
+                font_size: 18
+                font_name: "time_new_romans.ttf"
+
+            MDTextField:
+                id: customer_sign_up_l_name_textfield
+                hint_text: "Enter Last Name"
+                helper_text: "Leave empty if you don't have one"
+                helper_text_mode: "on_focus"
+                multiline: False
+                font_size: 18
+                font_name: "time_new_romans.ttf"
+
+        MDGridLayout:
+            cols: 2
+            spacing: "15dp"
+            row_force_default: True
+            row_default_height: 30
+
+            MDTextField:
+                id: customer_sign_up_pswd_textfield
+                hint_text: "Enter Password"
+                font_size: 18
+                font_name: "time_new_romans.ttf"
+                password: True
+
+            MDTextField:
+                id: customer_sign_up_re_pswd_textfield
+                hint_text: "Re-enter Password to verify"
+                font_size: 18
+                font_name: "time_new_romans.ttf"
+                password: True
+
+        MDGridLayout:
+            cols: 1
+            spacing: "15dp"
+            row_force_default: True
+            row_default_height: 30
+
+            MDTextField:
+                id: customer_sign_up_email_textfield
+                hint_text: "Enter Email Address"
+                font_size: 18
+                font_name: "time_new_romans.ttf"
+
+            MDTextField:
+                id: customer_sign_up_phone_no_textfield
+                hint_text: "Enter Phone Number"
+                font_size: 18
+                font_name: "time_new_romans.ttf"
+
+            MDTextField:
+                id: customer_sign_up_credit_no_textfield
+                hint_text: "Enter Credit Card Number"
+                font_size: 18
+                font_name: "time_new_romans.ttf"
+
+            MDTextField:
+                id: customer_sign_up_gender_textfield
+                hint_text: "Enter the Gender"
+                helper_text: "Male or Female"
+                helper_text_mode: "on_focus"
+                font_size: 18
+                font_name: "time_new_romans.ttf"
+
+            MDTextField:
+                id: customer_sign_up_date_textfield
+                hint_text: "Enter the Date of Birth"
+                helper_text: "Date format is DD-MM-YYYY"
+                helper_text_mode: "on_focus"
+                font_size: 18
+                font_name: "time_new_romans.ttf"
+
+    MDGridLayout:
+        cols: 1
+        spacing: "15dp"
+        row_force_default: True
+        row_default_height: 40
+        size_hint: None, None
+        size: "200dp", "150dp"
+        pos_hint: {"center_x": .55, "center_y": .18}
+
+        MDRectangleFlatButton:
+            id: customer_sign_up_submit_button
+            text: "Submit"
+            font_size: 18
+            font_name: "time_new_romans.ttf"
+            on_release:
+                root.verify(customer_sign_up_pswd_textfield, customer_sign_up_re_pswd_textfield)
+                root.data_saver(customer_sign_up_f_name_textfield, customer_sign_up_m_name_textfield, customer_sign_up_l_name_textfield, customer_sign_up_email_textfield, customer_sign_up_pswd_textfield, customer_sign_up_phone_no_textfield, customer_sign_up_credit_no_textfield, customer_sign_up_gender_textfield, customer_sign_up_date_textfield) if root.verify(customer_sign_up_pswd_textfield, customer_sign_up_re_pswd_textfield) else root.show_dialog_box()
+
+    MDBoxLayout:
+        orientation: "horizontal"
+        spacing: dp(15)
+        pos_hint: {"center_x": .5, "center_y": .145}
+        size_hint: None, None
+        size: "600dp", "20dp"
+
+        MDLabel:
+            text: "Already have an account? Click on the button to login!"
+            font_name: "time_new_romans.ttf"
+            font_size: 18
+            halign: "center"
+
+        MDRectangleFlatButton:
+            text: "Click Here to Login"
+            font_size: 18
+            font_name: "time_new_romans.ttf"
+            pos_hint: {"center_x": .5, "center_y": .5}
+            on_release:
+                app.root.current = "customer_login"
+                root.manager.transition.direction = "right"

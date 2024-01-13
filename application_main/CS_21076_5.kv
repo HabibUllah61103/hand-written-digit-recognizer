@@ -1,0 +1,167 @@
+<Product>:
+    name: "customer_product"
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDToolbar:
+            title: "Welcome"
+            md_bg_color: [150/255,200/255,150/255,255/255]
+            spacing: '20dp'
+            padding: '4dp'
+            id: layout
+            elevation: 15
+            left_action_items: [['menu',lambda x: nav_drawer.set_state('open'),'Menu']]
+
+        ScrollView:
+            bar_width: 15
+            MDGridLayout:
+                cols: 3
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: '25dp'
+                padding: '30dp'
+
+
+    MDNavigationDrawer:
+        id: nav_drawer
+
+        BoxLayout:
+            orientation:'vertical'
+            spacing: '5dp'
+            padding: '5dp'
+
+            Image:
+                source:'u.png'
+                pos_hint:{'center_x':0.5,'center_y':0.5}
+                size_hint_y:None
+                size: (dp(200),dp(180))
+
+            ScrollView:
+                MDList:
+                    spacing: '10dp'
+                    pos_hint:{'center_x':0.5,'center_y':0.5}
+
+                    OneLineIconListItem:
+                        text:'Profile'
+                        on_release:
+                            app.root.current = "customer_profile"
+                            root.manager.transition.direction = "left"
+                        IconLeftWidget:
+                            icon:'account'
+                            on_release:
+                                app.root.current = "customer_profile"
+
+                    OneLineIconListItem:
+                        text: 'Response History'
+                        on_release:
+                            app.root.current = "customer_shopping_history"
+                        IconLeftWidget:
+                            icon: 'history'
+                            on_release:
+                                app.root.current = "customer_shopping_history"
+
+                    OneLineIconListItem:
+                        text: 'Logout'
+                        on_release:
+                            app.root.current = "customer_login"
+                            root.logout("current_user.csv")
+                        IconLeftWidget:
+                            icon: 'logout'
+                            on_release:
+                                app.root.current = "customer_login"
+                                root.logout("current_user.csv")
+
+    
+    MDRaisedButton:
+        text: "Open File Explorer"
+        exit_manager: root.exit_file_manager
+        select_path: root.select_path
+        on_release: root.open_file_manager()
+
+<ContentCustomSheet>:
+    name: "custom_bottom_sheet"
+    quantity_list: product_quantity_list
+    cols: 1
+    size_hint_y: None
+    height: "800dp"
+    pos_hint: {"center_x": .5, "center_y": .5}
+
+    MDLabel:
+        size_hint_y: .1
+        text: "Click on Required Quantity"
+        font_size: 20
+        halign: "center"
+
+    ScrollView:
+        id: product_quantity_list
+        size_hint_y: .8
+        bar_width: 15
+
+
+<ElementCard>:
+    name: "element_card"
+
+    prod_id: ""
+    image: ""
+    laptop_name: ""
+    rate: ""
+    price: ""
+
+    focus_behavior: True
+    elevation: 10
+    orientation: "vertical"
+    on_release: None
+    size_hint_x: .5
+    size_hint_y: None
+    height: dp(400)
+    padding: dp(10)
+    radius: dp(25)
+
+    MDGridLayout:
+        cols: 1
+        padding: '5dp'
+        spacing: '5dp'
+
+        Image:
+            source: root.image
+            size_hint_y: .35
+
+        MDGridLayout:
+            cols: 1
+            size_hint_y: .15
+            MDLabel:
+                text: root.laptop_name
+                size_hint_y: .1
+                font_style: 'H6'
+
+            MDLabel:
+                text: root.price
+                size_hint_y: .1
+                font_style: 'H6'
+
+        OneLineIconListItem:
+            text: root.rate
+            size_hint_x: .95
+            size_hint_y: .10
+            IconLeftWidget:
+                icon: 'star'
+
+        OneLineIconListItem:
+            id: product_specs
+            text:'Specifications'
+            size_hint_x: .95
+            size_hint_y: .10
+            on_release: root.get_data(root, filename="products_info.csv")
+            IconLeftWidget:
+                icon: 'dots-vertical'
+                on_release: root.get_data(root, filename="products_info.csv")
+
+        OneLineIconListItem:
+            text: 'Add To Cart'
+            size_hint_x: .95
+            size_hint_y: .10
+            on_release: root.show_sheet()
+            IconLeftWidget:
+                icon: 'plus'
+                on_release: root.show_sheet()

@@ -1,0 +1,105 @@
+#:set w dp(700)
+#:set h dp(540)
+
+
+<CustomerLogin>:
+    name: "customer_login"
+
+    canvas.before:
+        Color:
+            rgba: .9, .9, .9, .3
+        Rectangle:
+            size: self.size
+
+    canvas:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            size: w, h
+            pos: self.center_x - w / 2, self.center_y - h / 2
+        Color:
+            rgba: 0, 0, 0, .2
+        Line:
+            points: (dp(240), dp(520), self.width - dp(240), dp(520))
+        Line:
+            points: (dp(240), dp(300), self.width - dp(240), dp(300))
+
+    MDLabel:
+        id: customer_login_login_label
+        text: "Login here"
+        text_size: self.width, dp(510)
+        font_name: "time_new_romans.ttf"
+        font_size: 35
+        halign: "center"
+        valign: "top"
+
+    MDGridLayout:
+        cols: 1
+        spacing: "20dp"
+        row_force_default: True
+        row_default_height: 40
+        size_hint: None, None
+        size: "400dp", "35dp"
+        pos_hint: {"center_x": .5, "center_y": .75}
+
+        MDTextField:
+            id: customer_login_login_email_textfield
+            hint_text: "Enter Email Address"
+            multiline: False
+            font_size: 18
+            font_name: "time_new_romans.ttf"
+
+
+        MDTextField:
+            id: customer_login_login_pswd_textfield
+            hint_text: "Enter Password"
+            multiline: False
+            font_size: 18
+            font_name: "time_new_romans.ttf"
+            password: True
+
+
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+
+            MDRectangleFlatButton:
+                id: customer_login_login_pswd_button
+                text: "Continue"
+                font_size: 18
+                font_name: "time_new_romans.ttf"
+                on_release:
+                    app.root.current = "customer_product" if root.validation(customer_login_login_email_textfield, customer_login_login_pswd_textfield) else "customer_login"
+                    root.manager.transition.direction = "left"
+
+    MDGridLayout:
+        cols: 1
+        spacing: "20dp"
+        row_force_default: True
+        row_default_height: 40
+        size_hint: None, None
+        size: "400dp", "35dp"
+        pos_hint: {"center_x": .5, "center_y": .4}
+
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+
+            MDLabel:
+                id: customer_login_not_account_label
+                text: "Does not have an account? Click on the button below!"
+                font_size: 18
+                font_name: "time_new_romans.ttf"
+
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "center"
+
+            MDRectangleFlatButton:
+                id: customer_login_signup_button
+                text: "Click Here to Sign Up"
+                font_size: 18
+                font_name: "time_new_romans.ttf"
+                on_release:
+                    app.root.current = "customer_sign_up"
+                    root.manager.transition.direction = "left"

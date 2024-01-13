@@ -1,0 +1,17 @@
+<ShoppingHistory>:
+    name: "customer_shopping_history"
+
+    MDGridLayout:
+        cols:1
+
+        MDToolbar:
+            title: "Shopping History"
+            halign: "center"
+            md_bg_color: [150/255,200/255,150/255,255/255]
+            id: layout
+            elevation: 15
+            left_action_items: [["arrow-left", lambda x: root.manager.callback("customer_product", "right"), "Back"]]
+
+        ScrollView:
+            MDList:
+                id: customer_shopping_history_list

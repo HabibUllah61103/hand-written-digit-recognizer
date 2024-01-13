@@ -1,0 +1,29 @@
+<CurrentCart>:
+    name: "customer_current_cart"
+
+    ScrollView:
+        BoxLayout:
+            orientation: 'vertical'
+
+            MDToolbar:
+                title: "Current Cart"
+                md_bg_color: [150/255,200/255,150/255,255/255]
+                spacing: '20dp'
+                padding: '4dp'
+                id: layout
+                elevation: 15
+                left_action_items: [['arrow-left', lambda x: root.manager.callback("customer_product", "right"), 'Back']]
+                right_action_items: [['check', lambda x: root.shipping_info(self), "Checkout"]]
+
+            ScrollView:
+                size_hint_y: .9
+                MDGridLayout:
+                    id: customer_current_cart_info
+                    cols: 1
+                    padding: dp(20)
+                    spacing: dp(50)
+                    row_force_default: True
+                    row_default_height: 40
+                    size_hint_y: None
+                    height: self.minimum_height
+                    width: dp(100)

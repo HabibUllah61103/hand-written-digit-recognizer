@@ -1,0 +1,30 @@
+<CustomerProfile>:
+    name: "customer_profile"
+
+
+    MDGridLayout:
+        cols: 1
+
+        MDGridLayout:
+            cols: 1
+            size_hint: 1, .1
+
+            MDToolbar:
+                title: "Profile"
+                halign: "center"
+                md_bg_color: [150/255,200/255,150/255,255/255]
+                id: layout
+                elevation: 15
+                left_action_items: [["arrow-left", lambda x: root.manager.callback("customer_product", "right"), "Back"]]
+
+
+        ScrollView:
+            MDGridLayout:
+                id: customer_profile_info_grid
+                cols: 1
+                padding: dp(20)
+                spacing: dp(20)
+                row_force_default: True
+                row_default_height: 40
+                size_hint_y: None
+                height: self.minimum_height
