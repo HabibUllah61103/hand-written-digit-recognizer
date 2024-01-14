@@ -9,7 +9,7 @@ Config.set("graphics", "resizable", False)
 from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen, ScreenManager
-from CS_21076_2 import DataHandler
+from CS_21075_2 import DataHandler
 from kivymd.uix.label import MDLabel
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
@@ -167,7 +167,7 @@ class GUI:
             with open("current_user.csv", "r") as current_user:
                 csv_reader = csv.reader(current_user)
                 for row in csv_reader:
-                    current_user = row[2]
+                    current_user = row[0]
                     current_user_id = row[0]
 
             if not (current_user in os.listdir("./output")):
@@ -190,10 +190,8 @@ class GUI:
                 image_widget = Image(source=current_image_path, size_hint=(1, 1))
                 temp = "Predicted Output: " + str(output)
 
-                self.shopping_history_filename = (
-                    f"{current_user_id}_shopping_history.csv"
-                )
-                with open(self.shopping_history_filename, "a", newline="") as f:
+                self.history_filename = f"{current_user_id}_history.csv"
+                with open(self.history_filename, "a", newline="") as f:
                     writer_obj = csv.writer(f)
                     orders_data = [[current_time, current_image_path, output]]
                     for i in orders_data:
@@ -219,22 +217,18 @@ class GUI:
             while True:
                 try:
                     self.user_id = self.get_id(filename="current_user.csv")
-                    self.shopping_history_filename = (
-                        f"{self.user_id}_shopping_history.csv"
-                    )
+                    self.history_filename = f"{self.user_id}_history.csv"
 
-                    with open(self.shopping_history_filename) as f:
+                    with open(self.history_filename) as f:
                         file_data = f.read()
                         if file_data == "":
                             self.empty_note = MDLabel(
                                 text="No Response History", halign="center"
                             )
-                            self.ids.customer_shopping_history_list.add_widget(
-                                self.empty_note
-                            )
+                            self.ids.customer_history_list.add_widget(self.empty_note)
                             f.close()
                         else:
-                            with open(self.shopping_history_filename) as data:
+                            with open(self.history_filename) as data:
                                 reader_obj = csv.reader(data)
                                 for i in reader_obj:
                                     self.items = ThreeLineListItem(
@@ -242,17 +236,17 @@ class GUI:
                                         secondary_text=f"Saved Image Path: {i[1]}",
                                         tertiary_text=f"Date & Time: {i[0]}",
                                     )
-                                    self.ids.customer_shopping_history_list.add_widget(
+                                    self.ids.customer_history_list.add_widget(
                                         self.items
                                     )
                     break
 
                 except FileNotFoundError as e:
-                    with open(self.shopping_history_filename, "w") as f:
+                    with open(self.history_filename, "w") as f:
                         f.close()
 
         def on_leave(self, *args):
-            self.ids.customer_shopping_history_list.clear_widgets()
+            self.ids.customer_history_list.clear_widgets()
 
     # This class manages the flow, as well as transitions between different screens.
     class Manager(ScreenManager):
@@ -261,13 +255,13 @@ class GUI:
             self.transition.direction = direction
 
     # This class is used to build and initiate the application.
-    class ShoppingApp(MDApp):
+    class NNApp(MDApp):
         def build(self):
-            kv = Builder.load_file("CS_21076_1.kv")
+            kv = Builder.load_file("CS_21075_1.kv")
             return kv
 
         def on_start(self):
-            self.title = "Handwritten Digit Recognator (HDAAAI)"
+            self.title = "NNEzy (HDAAAI)"
 
 
-app = GUI().ShoppingApp().run()
+app = GUI().NNApp().run()

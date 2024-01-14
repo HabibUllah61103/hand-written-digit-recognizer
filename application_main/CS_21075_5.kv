@@ -109,11 +109,11 @@
                     OneLineIconListItem:
                         text: 'Response History'
                         on_release:
-                            app.root.current = "customer_shopping_history"
+                            app.root.current = "customer_history"
                         IconLeftWidget:
                             icon: 'history'
                             on_release:
-                                app.root.current = "customer_shopping_history"
+                                app.root.current = "customer_history"
 
                     OneLineIconListItem:
                         text: 'Logout'
@@ -147,69 +147,3 @@
         bar_width: 15
 
 
-<ElementCard>:
-    name: "element_card"
-
-    prod_id: ""
-    image: ""
-    laptop_name: ""
-    rate: ""
-    price: ""
-
-    focus_behavior: True
-    elevation: 10
-    orientation: "vertical"
-    on_release: None
-    size_hint_x: .5
-    size_hint_y: None
-    height: dp(400)
-    padding: dp(10)
-    radius: dp(25)
-
-    MDGridLayout:
-        cols: 1
-        padding: '5dp'
-        spacing: '5dp'
-
-        Image:
-            source: root.image
-            size_hint_y: .35
-
-        MDGridLayout:
-            cols: 1
-            size_hint_y: .15
-            MDLabel:
-                text: root.laptop_name
-                size_hint_y: .1
-                font_style: 'H6'
-
-            MDLabel:
-                text: root.price
-                size_hint_y: .1
-                font_style: 'H6'
-
-        OneLineIconListItem:
-            text: root.rate
-            size_hint_x: .95
-            size_hint_y: .10
-            IconLeftWidget:
-                icon: 'star'
-
-        OneLineIconListItem:
-            id: product_specs
-            text:'Specifications'
-            size_hint_x: .95
-            size_hint_y: .10
-            on_release: root.get_data(root, filename="products_info.csv")
-            IconLeftWidget:
-                icon: 'dots-vertical'
-                on_release: root.get_data(root, filename="products_info.csv")
-
-        OneLineIconListItem:
-            text: 'Add To Cart'
-            size_hint_x: .95
-            size_hint_y: .10
-            on_release: root.show_sheet()
-            IconLeftWidget:
-                icon: 'plus'
-                on_release: root.show_sheet()

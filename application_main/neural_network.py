@@ -2,8 +2,10 @@ import numpy as np
 import pandas as pd
 import cv2
 from matplotlib import pyplot as plt
+import os
 
-data = pd.read_csv("train.csv")
+current_dir = os.getcwd()
+data = pd.read_csv(current_dir + "\\train.csv")
 
 data = np.array(data)
 m, n = data.shape

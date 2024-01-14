@@ -1,8 +1,8 @@
-#: include CS_21076_2.kv
-#: include CS_21076_3.kv
-#: include CS_21076_4.kv
-#: include CS_21076_5.kv
-#: include CS_21076_7.kv
+#: include CS_21075_2.kv
+#: include CS_21075_3.kv
+#: include CS_21075_4.kv
+#: include CS_21075_5.kv
+#: include CS_21075_7.kv
 
 
 #:set w dp(700)
@@ -28,11 +28,26 @@ Manager:
 
     MDLabel:
         id: intro_title_label
-        text: "HDAAAI"
+        text: "NNEzy"
         font_name: "time_new_romans.ttf"
-        font_size: 90
+        font_size: 120
         halign: "center"
-        pos_hint: {"center_x": .5, "center_y": .8}
+        pos_hint: {"center_x": .5, "center_y": .7}
+
+    MDLabel:
+        id: intro_second_label
+        text: "BY HDAAAI"
+        font_name: "time_new_romans.ttf"
+        font_size: 25
+        halign: "center"
+        pos_hint: {"center_x": .5, "center_y": .6}
+    
+    MDLabel:
+        id: intro_second_label
+        text: "Handwritten Digit Recognizer using Neural Network"
+        font_size: 15
+        halign: "center"
+        pos_hint: {"center_x": .5, "center_y": .55}
 
     MDGridLayout:
         cols: 1
