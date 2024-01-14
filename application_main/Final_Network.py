@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 from neural_network import make_predictions
-
+from datetime import datetime
 
 def preprocess_mobile_image(image_path):
     img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
@@ -31,4 +31,8 @@ def image_loader(path, output_path):
     predicted_output = make_predictions(mobile_input, W1, b1, W2, b2)
     plt.imshow(mobile_input.reshape((28, 28)), cmap="gray", extent=[0, 28, 28, 0])
     plt.axis("off")
-    plt.savefig(output_path+ str(predicted_output))
+    current_datetime = datetime.now()
+    current_time_formatted = current_datetime.strftime("%Y_%m_%d_%H_%M_%S")
+    output_path = output_path + str(predicted_output) + "_" + current_time_formatted
+    plt.savefig(output_path)
+    return  (output_path + ".png"), predicted_output, current_time_formatted

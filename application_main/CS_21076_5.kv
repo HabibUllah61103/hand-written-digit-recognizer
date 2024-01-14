@@ -1,5 +1,24 @@
 <Product>:
     name: "customer_product"
+    canvas.before:
+        Color:
+            rgba: .9, .9, .9, .3
+        Rectangle:
+            size: self.size
+
+    canvas:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            size: w, h-100
+            pos: self.center_x - w / 2, self.center_y - (h -270)
+        Color:
+            rgba: 0, 0, 0, .2
+        Line:
+            points: (dp(240), dp(470), self.width - dp(240), dp(470))
+        Line:
+            points: (dp(240), dp(80), self.width - dp(240), dp(80))
+
 
     MDBoxLayout:
         orientation: 'vertical'
@@ -21,6 +40,42 @@
                 spacing: '25dp'
                 padding: '30dp'
 
+    MDTextButton:
+        text: "Your Output"
+        text_size: self.width, dp(510)
+        font_name: "time_new_romans.ttf"
+        font_size: 20
+        theme_text_color: "Custom"
+        text_color: 33/255, 150/255, 243/255, 1
+        md_bg_color: 33/255, 150/255, 243/255, 1
+        pos: dp(100), dp(510)
+
+    MDRectangleFlatButton:
+        text: "Open File Explorer"
+        text_size: self.width, dp(510)
+        font_size: 18
+        font_name: "time_new_romans.ttf"
+        exit_manager: root.exit_file_manager
+        select_path: root.select_path
+        pos: dp(860), dp(500)
+        on_release: root.open_file_manager()
+
+    BoxLayout:
+        id: image_display_layout
+        pos: w/3, h/6
+        size_hint: (None, None)
+        size: 400, 400
+        orientation: 'vertical'
+
+    MDTextButton:
+        id: output_button
+        text_size: dp(520), dp(510)
+        font_name: "time_new_romans.ttf"
+        font_size: 20
+        theme_text_color: "Custom"
+        text_color: 33/255, 150/255, 243/255, 1
+        md_bg_color: 33/255, 150/255, 243/255, 1
+        pos: dp(620), dp(375)
 
     MDNavigationDrawer:
         id: nav_drawer
@@ -71,12 +126,6 @@
                                 app.root.current = "customer_login"
                                 root.logout("current_user.csv")
 
-    
-    MDRaisedButton:
-        text: "Open File Explorer"
-        exit_manager: root.exit_file_manager
-        select_path: root.select_path
-        on_release: root.open_file_manager()
 
 <ContentCustomSheet>:
     name: "custom_bottom_sheet"
